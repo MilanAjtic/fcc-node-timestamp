@@ -30,7 +30,7 @@ app.get("/api/timestamp/:date_string", function(req, res) {
     date = new Date(parseInt(req.params.date_string));
   } else date = new Date(req.params.date_string);
 
-  res.json({ unix: date.getTime(), utc: date.toUTCString(), test: req.params });
+  res.json({ unix: date.getTime(), utc: date.toUTCString() });
 });
 
 app.get("/api/timestamp/", function(req, res) {
