@@ -24,7 +24,11 @@ app.get("/api/hello", function(req, res) {
 });
 
 app.get("/api/timestamp/:date_string", function(req, res) {
-  var date = new Date(req.params.date_string);
+  var preparedDate = req.params.date_string;
+  if (/^\d+$/.test(req.params.date_string)) {
+    preparedDate = parseInt(preparedDate);
+  }
+  var date = new Date(preparedDate);
   res.json({ unix: date.getTime(), utc: date.toUTCString() });
 });
 
