@@ -24,12 +24,13 @@ app.get("/api/hello", function(req, res) {
 });
 
 app.get("/api/timestamp/:date_string", function(req, res) {
-  var preparedDate = req.params.date_string;
+  var date;
+
   if (/^\d+$/.test(req.params.date_string)) {
-    preparedDate = parseInt(preparedDate);
-  }
-  var date = new Date(preparedDate);
-  res.json({ unix: date.getTime(), utc: date.toUTCString() });
+    date = new Date(parseInt(req.params.date_string));
+  } else date = new Date(req.params.date_string);
+
+  res.json({ unix: date.getTime(), utc: date.toUTCString(), test: req.params });
 });
 
 app.get("/api/timestamp/", function(req, res) {
